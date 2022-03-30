@@ -1,0 +1,14 @@
+# yaml
+# close-loop
+tar:
+    target_pose_x: 1.0
+    target_pose_y: 4.0
+    target_pose_z: 0.0
+limit:
+    ax_limit: 6.0
+    aw_limit: 12.0
+    vx_limit: 0.6
+    vw_limit: 1.2
+pid:
+    w_pid: [20, 20, 0.5]
+    v_pid: [4, 2, 0]
