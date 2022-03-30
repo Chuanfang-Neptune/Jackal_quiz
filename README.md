@@ -10,19 +10,20 @@
 - Close-loop trajecotry following: follow the planned trajectory from MPC by following the waypoints and disregarding the time. (Control output is a function of next waypoint on the trajectory). This method takes localization data from the sensor (filtered odometry) or ground truth in Gazebo (assuming that there is an accurate camera looking down on the robot). 2 PID controllers on angular and linear velocities are combined to best follow the waypoints with a curve. The parameters of PID are initialized with N-Z method and edited according to experience. Upon reaching the waypoint, the waypoint is removed from trajectory and next waypoint is poped.
 
 # Code structure
+trajectory_solver.py
 
-    ├── Jackal_quiz  # Class for jackal_quiz robot
-    │   ├── __init__  # initialization of robot states variables 
-    │   ├── odometryCb # callback localisation with sensors
-    │   ├── gazebo_model_Cb  # callback localisation with gazebo ground truth
-    │   ├── l2_tar_distance  # static function for computing l2 error
-    │   ├── reg_ang  # static function for computing angle error 
-    │   ├── pid_control  # static function for pid control
-    │   ├── traj_following # close loop trajectory following
-    │   ├── open_loop_traj_following # open loop trajectory following
-    ├── quat2euler  # math util for conversion quat2euler
-    ├── solveProblem # function for planning trajectory to the target
-    ├── cli # arguments parser
+    ├── Jackal_quiz()  # Class for jackal_quiz robot
+    │   ├── __init__()  # initialization of robot states variables 
+    │   ├── odometryCb() # callback localisation with sensors
+    │   ├── gazebo_model_Cb()  # callback localisation with gazebo ground truth
+    │   ├── l2_tar_distance()  # static function for computing l2 error
+    │   ├── reg_ang  # static() function for computing angle error 
+    │   ├── pid_control()  # static function for pid control
+    │   ├── traj_following() # close loop trajectory following
+    │   ├── open_loop_traj_following() # open loop trajectory following
+    ├── quat2euler()  # math util for conversion quat2euler
+    ├── solveProblem() # function for planning trajectory to the target
+    ├── cli() # arguments parser
     └── __main__ # main program logic
 
 # How to use
@@ -58,7 +59,7 @@ Build the two repositories at:
 roslaunch jackal_gazebo empty_world.launch
 ```
 
-## Edit the target position in target.yaml
+## Edit the target position in yaml
 
     tar:
         target_pose_x: 1.0 #change this
@@ -66,7 +67,7 @@ roslaunch jackal_gazebo empty_world.launch
 
 Note:
 - A lower speed is needed if using open-loop control. (comment the upper part and uncomment lower part)
-- Setting a target that is too far away from the robot would result in a long solving time for the MPC path planner. Good examples of targets are [1.0,4.0], [2.0,4.0], [3.0,4.0], [4.0,4.0]
+- Setting a target that is too far away from the robot would result in a long solving time for the MPC path planner. Good examples of targets are [1.0,4.0], [2.0,4.0], [3.0,4.0], [4.0,4.0]. For the reproduction of video I provided some pre-defined yaml configs.
 
 ## Open loop control
 
